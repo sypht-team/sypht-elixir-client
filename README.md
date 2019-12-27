@@ -2,7 +2,7 @@
 
 An Elixir client for the Sypht API <https://sypht.com>
 
-The Mix project for this client is in the sypht_client folder. Refer to [this read me](https://github.com/sypht-team/sypht-elixir-client/sypht_client/README.md) for details.
+The Mix project for this client is in the sypht_client folder. Refer to [this read me](https://github.com/sypht-team/sypht-elixir-client/tree/master/sypht_client) for details.
 
 ## License
 
