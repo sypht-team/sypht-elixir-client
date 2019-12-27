@@ -5,8 +5,7 @@ use Mix.Config
 # own value(s) for upload_field_sets. 
 # See https://docs.sypht.com/#section/Introduction for details.
 config :sypht_client,
-  # auth_url: "https://login.sypht.com/oauth/token",
-  auth_url: "https://not.a.site/oauth/token",
+  auth_url: "https://login.sypht.com/oauth/token",
   auth_ttl: 84_600_000,
   auth_retry_on: [500],
   auth_initial_backoff: 200,
