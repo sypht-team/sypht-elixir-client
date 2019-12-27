@@ -2,13 +2,13 @@
 
 An Elixir client for the Sypht API <https://sypht.com>
 
-The method SyphtClient.send\1 demonstrates the API:
+The method SyphtClient.Workflow.send\1 demonstrates the API:
 
 ```elixir
-def send(file_path) do
-  with {:ok, access_token} <- SyphtAuth.access_token(),
-       {:ok, file_id} <- SyphtUpload.send(access_token, file_path),
-       {:ok, result} <- SyphtResult.get(access_token, file_id) do
+def send(path) do
+  with {:ok, access_token} <- SyphtClient.Auth.access_token(),
+       {:ok, file_id} <- SyphtClient.Upload.file(access_token, path),
+       {:ok, result} <- SyphtClient.Result.get(access_token, file_id) do
     {:ok, result}
   else
     {:error, reason} -> {:error, reason}
@@ -17,9 +17,9 @@ def send(file_path) do
 end
 ```
 
-The `sypht` mix task included in this repo lets you call this from the command line.
+The `sypht` mix task included in this repo lets you call this from the command line. The workflow can take a little while.
 
-The client is designed to run in a consumer or worker process started by something like [ConsumerSupervisor](https://hexdocs.pm/gen_stage/ConsumerSupervisor.html), [Flow](https://hexdocs.pm/flow/Flow.html) or [Broadway](https://hexdocs.pm/broadway/Broadway.html).
+The client is designed to run in a consumer or worker process started by something like [ConsumerSupervisor](https://hexdocs.pm/gen_stage/ConsumerSupervisor.html), [Flow](https://hexdocs.pm/flow/Flow.html) or [Broadway](https://hexdocs.pm/broadway/Broadway.html). Sypht API calls will retry failed requests based on configuration settings. See mix.exs for details.
 
 If you want finer-grained control, invoke the methods in the SyphtAuth, SyphtUpload and SyphtResult modules directly.
 

@@ -6,8 +6,22 @@ defmodule SyphtClient.MixProject do
       app: :sypht_client,
       version: "0.1.0",
       elixir: "~> 1.9",
+      description: description(),
+      package: package(),
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      source_url: "https://github.com/sypht-team/sypht-elixir-client/sypht_client"
+    ]
+  end
+
+  defp description() do
+    "A client for the Sypht OCR API (https://www.sypht.com/). Workflow encapsulated in SyphtClient.send\\1."
+  end
+
+  defp package() do
+    [
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => "https://github.com/sypht-team/sypht-elixir-client"}
     ]
   end
 
@@ -69,7 +83,8 @@ defmodule SyphtClient.MixProject do
     [
       {:jason, "~> 1.1"},
       {:httpoison, "~> 1.4", override: true},
-      {:cachex, "~> 3.1"}
+      {:cachex, "~> 3.1"},
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
     ]
   end
 end

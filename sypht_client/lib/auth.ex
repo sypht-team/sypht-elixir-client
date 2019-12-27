@@ -1,4 +1,4 @@
-defmodule SyphtAuth do
+defmodule SyphtClient.Auth do
   @moduledoc """
   Acquires and caches Sypht access tokens.
   """
@@ -27,12 +27,13 @@ defmodule SyphtAuth do
   @error_prefix Application.get_env(:sypht_client, :auth_error_prefix)
 
   @doc """
+  Gets and caches an access token using the client ID and secret in the environment variable SYPHT_API_KEY.
   Returns {:ok, sypht_bearer_token} if successful, {:error, reason_string} otherwise. 
   """
   def access_token() do
     case Cachex.get(@cache_name, @token_cache_key) do
       {:ok, nil} ->
-        case RetryingClient.post(@http_args, @backoff_args) do
+        case SyphtClient.Retry.post(@http_args, @backoff_args) do
           {:ok, response} ->
             response_body = Jason.decode!(response)
             access_token = response_body["access_token"]
@@ -47,10 +48,10 @@ defmodule SyphtAuth do
             {:ok, access_token}
 
           {:error, status, reason} ->
-            {:error, SyphtError.message(@error_prefix, status, reason)}
+            {:error, SyphtClient.Error.message(@error_prefix, status, reason)}
 
           {:error, reason} ->
-            {:error, SyphtError.message(@error_prefix, reason)}
+            {:error, SyphtClient.Error.message(@error_prefix, reason)}
         end
 
       {:ok, access_token} ->

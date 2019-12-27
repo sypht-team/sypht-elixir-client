@@ -1,4 +1,4 @@
-defmodule SyphtResult do
+defmodule SyphtClient.Result do
   @moduledoc """
   Retrieves OCR results from Sypht.
   """
@@ -16,15 +16,15 @@ defmodule SyphtResult do
   Returns {:ok, decoded_json_response} if sucessful, {:error, reason_string} otherwise.
   """
   def get(access_token, file_id) do
-    case RetryingClient.get(http_args(access_token, file_id), @backoff_args) do
+    case SyphtClient.Retry.get(http_args(access_token, file_id), @backoff_args) do
       {:ok, response} ->
         {:ok, Jason.decode!(response)}
 
       {:error, status, reason} ->
-        {:error, SyphtError.message(@error_prefix, status, reason)}
+        {:error, SyphtClient.Error.message(@error_prefix, status, reason)}
 
       {:error, reason} ->
-        {:error, SyphtError.message(@error_prefix, reason)}
+        {:error, SyphtClient.Error.message(@error_prefix, reason)}
     end
   end
 

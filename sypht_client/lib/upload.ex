@@ -1,4 +1,4 @@
-defmodule SyphtUpload do
+defmodule SyphtClient.Upload do
   @moduledoc """
   Uploads files to Sypht.
   """
@@ -19,32 +19,32 @@ defmodule SyphtUpload do
   @error_prefix Application.get_env(:sypht_client, :upload_error_prefix)
 
   @doc """
-  Tries to upload file_path to Sypht using access_token. 
+  Uploads the file at path to Sypht using access_token. 
   Returns {:ok, file_id} if successful, {:error, reason_string} otherwise.
   """
-  def send(access_token, file_path) do
-    form_data = {"form-data", [{"name", "fileToUpload"}, {"filename", Path.basename(file_path)}]}
+  def file(access_token, path) do
+    form_data = {"form-data", [{"name", "fileToUpload"}, {"filename", Path.basename(path)}]}
 
     payload = {
       :multipart,
       [
-        {:file, file_path, form_data, []},
+        {:file, path, form_data, []},
         @field_set_part
       ]
     }
 
     headers = [{"Authorization", "Bearer #{access_token}"} | @headers]
 
-    case RetryingClient.post(http_args(headers, payload), @backoff_args) do
+    case SyphtClient.Retry.post(http_args(headers, payload), @backoff_args) do
       {:ok, response} ->
         response_body = Jason.decode!(response)
         {:ok, response_body["fileId"]}
 
       {:error, status, message} ->
-        {:error, SyphtError.message(@error_prefix, status, message)}
+        {:error, SyphtClient.Error.message(@error_prefix, status, message)}
 
       {:error, reason} ->
-        {:error, SyphtError.message(@error_prefix, reason)}
+        {:error, SyphtClient.Error.message(@error_prefix, reason)}
     end
   end
 

@@ -1,14 +1,8 @@
-defmodule RetryingClient do
-  @moduledoc """
-  Calls HTTP GET or POST with retries using exponential backoff.
-  """
+defmodule SyphtClient.Retry do
+  @moduledoc false
+
   use Bitwise
 
-  @doc """
-  HTTP POST a payload using the supplied HTTP and backoff arguments.
-  Returns {:ok, response_body} if successful or {:error, reason} otherwise.
-  Reason can be an HTTP status code or an error atom.
-  """
   def post(http_args, backoff_args) do
     http(
       fn ->
@@ -23,11 +17,6 @@ defmodule RetryingClient do
     )
   end
 
-  @doc """
-  HTTP GET a resource using the supplied HTTP and backoff arguments.
-  Returns {:ok, response_body} if successful or {:error, reason} otherwise.
-  Reason can be an HTTP status code or an error atom.
-  """
   def get(http_args, backoff_args) do
     http(
       fn ->
@@ -50,10 +39,6 @@ defmodule RetryingClient do
     }
   end
 
-  @doc """
-  Calls and retries method according to backoff_state.
-  Expects method to return either {:ok, HTTPoison.Response} or {:error, HTTPoison.Error}
-  """
   def http(method, backoff_state) do
     case method.() do
       {:ok, %HTTPoison.Response{status_code: status, body: body}} when status in [200, 201] ->
