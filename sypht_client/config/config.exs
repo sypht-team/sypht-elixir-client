@@ -1,6 +1,8 @@
 use Mix.Config
 
-# override default application settings with a configuration section like this
+# This configuration section uses the default values in mix.exs
+# Put your overrides here. You will especially want to set your
+# own value(s) for upload_field_sets. See [] for details.
 config :sypht_client,
   auth_url: "https://login.sypht.com/oauth/token",
   auth_ttl: 84_600_000,
@@ -13,7 +15,7 @@ config :sypht_client,
   upload_field_sets: ["sypht.generic"],
   upload_retry_on: [500],
   upload_initial_backoff: 200,
-  upload_retry_until: 300_000,
+  upload_retry_until: 60_000,
   upload_http_options: [ssl: [{:versions, [:"tlsv1.2"]}]],
   upload_error_prefix: "SyphtUpload failed:",
   result_url: "https://api.sypht.com/result/final",
