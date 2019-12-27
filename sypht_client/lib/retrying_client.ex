@@ -50,7 +50,11 @@ defmodule RetryingClient do
     }
   end
 
-  defp http(method, backoff_state) do
+  @doc """
+  Calls and retries method according to backoff_state.
+  Expects method to return either {:ok, HTTPoison.Response} or {:error, HTTPoison.Error}
+  """
+  def http(method, backoff_state) do
     case method.() do
       {:ok, %HTTPoison.Response{status_code: status, body: body}} when status in [200, 201] ->
         {:ok, body}
