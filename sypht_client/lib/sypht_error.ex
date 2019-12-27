@@ -4,7 +4,17 @@ defmodule SyphtError do
   """
 
   @doc """
-  Returns an error message starting with prefix when status is numeric and a Sypht error message is present. 
+  Returns an error message starting with prefix when status is numeric and a nil 
+  or blank reason is provided. Status is assumed to be an HTTP status code.
+  """
+  def message(prefix, status, reason)
+      when is_number(status) and (reason == nil or reason == "") do
+    "#{prefix} HTTP #{status}"
+  end
+
+  @doc """
+  Returns an error message starting with prefix when status is numeric and reason is present.
+  Reason may be a Sypht error message. 
   Status is assumed to be an HTTP status code.
   """
   def message(prefix, status, reason) when is_number(status) do

@@ -35,15 +35,13 @@ defmodule SyphtUpload do
 
     headers = [{"Authorization", "Bearer #{access_token}"} | @headers]
 
-    IO.inspect(http_args(headers, payload))
-
     case RetryingClient.post(http_args(headers, payload), @backoff_args) do
       {:ok, response} ->
         response_body = Jason.decode!(response)
         {:ok, response_body["fileId"]}
 
-      {:error, status, reason} ->
-        {:error, SyphtError.message(@error_prefix, status, reason)}
+      {:error, status, message} ->
+        {:error, SyphtError.message(@error_prefix, status, message)}
 
       {:error, reason} ->
         {:error, SyphtError.message(@error_prefix, reason)}

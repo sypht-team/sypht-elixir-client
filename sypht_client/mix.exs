@@ -32,7 +32,7 @@ defmodule SyphtClient.MixProject do
         auth_error_prefix: "SyphtAuth failed:",
         # URL of file upload end point
         upload_url: "https://api.sypht.com/fileupload",
-        # Sypht field set(s) to invoke (see )
+        # Sypht field set(s) to invoke (see https://docs.sypht.com/#section/Introduction)
         upload_field_sets: ["sypht.generic"],
         # Retry uploads on server HTTP status
         upload_retry_on: [500],
