@@ -38,7 +38,7 @@ defmodule SyphtClient.MixProject do
         auth_retry_on: [500],
         # Initial backoff milliseconds
         auth_initial_backoff: 200,
-        # Continue backing off and retrying token acquisition for this many milliseconds
+        # Continue backing off and retrying until this many milliseconds have elapsed
         auth_retry_until: 30_000,
         # Hackney HTTP options for authentication
         auth_http_options: [ssl: [{:versions, [:"tlsv1.2"]}]],
@@ -52,7 +52,7 @@ defmodule SyphtClient.MixProject do
         upload_retry_on: [500],
         # Initial backoff milliseconds
         upload_initial_backoff: 200,
-        # Continue backing off and retrying uploads for this many milliseconds
+        # Continue backing off and retrying until this many milliseconds have elapsed
         upload_retry_until: 60_000,
         # Hackney HTTP options for uploads
         upload_http_options: [ssl: [{:versions, [:"tlsv1.2"]}]],
@@ -64,7 +64,7 @@ defmodule SyphtClient.MixProject do
         result_retry_on: [202, 500],
         # Initial backoff milliseconds
         result_initial_backoff: 200,
-        # Continue backing off and retrying results for this many milliseconds
+        # Continue backing off and retrying until this many milliseconds have elapsed
         result_retry_until: 300_000,
         # Hackney HTTP options for results
         result_http_options: [

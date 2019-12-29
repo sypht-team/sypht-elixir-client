@@ -1,6 +1,18 @@
 defmodule SyphtClient.Upload do
   @moduledoc """
   Uploads files to Sypht.
+
+  ## Module properties
+
+  Override these defaults in the `:sypht_client` section of your config.exs files.
+
+  * `upload_url: "https://api.sypht.com/fileupload"` - URL of file upload end point
+  * `upload_field_sets: ["sypht.generic"]` - Sypht field set(s) to invoke (see https://docs.sypht.com/#section/Introduction)
+  * `upload_retry_on: [500]` - Retry uploads on server HTTP status  
+  * `upload_initial_backoff: 200` - Initial backoff milliseconds
+  * `upload_retry_until: 60_000` - Continue backing off and retrying until this many milliseconds have elapsed
+  * `upload_http_options: [ssl: [{:versions, [:"tlsv1.2"]}]]` - Hackney HTTP options for uploads
+  * `upload_error_prefix: "SyphtUpload failed:"` - Prefix upload error messages with this
   """
   @url Application.get_env(:sypht_client, :upload_url)
   @http_options Application.get_env(:sypht_client, :upload_http_options)

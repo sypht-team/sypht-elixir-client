@@ -1,6 +1,6 @@
 defmodule Mix.Tasks.Sypht do
   @moduledoc """
-  Invoke SyphtClient.Workflow.send(path) from the project directory,
+  Invoke SyphtClient.Workflow.send(path) from the command line.
   """
   use Mix.Task
 
@@ -10,7 +10,7 @@ defmodule Mix.Tasks.Sypht do
   ## Examples
 
   `mix sypht my-file.pdf`
-  
+
   `{:ok, %{
      "fileId" => "5fd47912-70e9-40fb-9af7-afae1969d9a3",
      "results" => %{
@@ -20,7 +20,10 @@ defmodule Mix.Tasks.Sypht do
            "confidence" => 1,
            "name" => "generic.structure",
            "value" => %{ ...
-   }`
+       ]
+       ...
+     }
+   }}`
   """
   def run([path]) do
     Application.ensure_all_started(:hackney)

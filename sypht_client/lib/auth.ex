@@ -1,6 +1,18 @@
 defmodule SyphtClient.Auth do
   @moduledoc """
   Acquires and caches Sypht access tokens.
+
+  ## Module properties
+
+  Override these defaults in the `:sypht_client` section of your config.exs files.
+
+  * `auth_url: "https://login.sypht.com/oauth/token"` - URL of token acquisition end point
+  * `auth_ttl: 84_600_000` - Token TTL milliseconds. Sypht tokens last for 24 hours - reacquire after 23 hours 30 minutes
+  * `auth_retry_on: [500]` - Retry token acquisition on server HTTP status
+  * `auth_initial_backoff: 200` - Initial backoff milliseconds
+  * `auth_retry_until: 30_000` - Continue backing off and retrying until this many milliseconds have elapsed
+  * `auth_http_options: [ssl: [{:versions, [:"tlsv1.2"]}]]` - Hackney HTTP options for authentication
+  * `auth_error_prefix: "SyphtAuth failed:"` - Prefix authentication error messages with this
   """
   @cache_name :token_cache
   @token_cache_key "sypht_access_token"
