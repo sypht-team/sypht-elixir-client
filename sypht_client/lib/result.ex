@@ -1,6 +1,6 @@
 defmodule SyphtClient.Result do
   @moduledoc """
-  Retrieves OCR results from Sypht.
+  Gets OCR results from Sypht.
 
   ## Module properties
 
@@ -27,7 +27,7 @@ defmodule SyphtClient.Result do
   @error_prefix Application.get_env(:sypht_client, :result_error_prefix)
 
   @doc """
-  Tries to get an OCR result from Sypht for file_id using access_token.
+  Gets an OCR result from Sypht for file_id using access_token.
   Returns {:ok, decoded_json_response} if successful, {:error, reason_string} otherwise.
   """
   def get(access_token, file_id) do

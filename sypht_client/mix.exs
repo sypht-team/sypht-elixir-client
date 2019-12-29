@@ -10,7 +10,10 @@ defmodule SyphtClient.MixProject do
       package: package(),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      source_url: "https://github.com/sypht-team/sypht-elixir-client/sypht_client"
+      source_url: "https://github.com/sypht-team/sypht-elixir-client/sypht_client",
+      docs: [
+        source_url_pattern: "https://github.com/sypht-team/sypht-elixir-client/blob/master/sypht_client/%{path}#L%{line}"
+      ]
     ]
   end
 
