@@ -1,4 +1,4 @@
-defmodule SyphtClient.Workflow do
+defmodule SyphtClient do
   @moduledoc """
   Demonstrates the Sypht API document workflow. 
   Parsing Sypht API results is beyond the scope of this client. 

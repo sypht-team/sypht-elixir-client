@@ -4,6 +4,7 @@ defmodule SyphtClient.MixProject do
   def project do
     [
       app: :sypht_client,
+      name: "SyphtClient",
       version: "0.1.0",
       elixir: "~> 1.9",
       description: description(),
@@ -12,7 +13,8 @@ defmodule SyphtClient.MixProject do
       deps: deps(),
       source_url: "https://github.com/sypht-team/sypht-elixir-client/sypht_client",
       docs: [
-        source_url_pattern: "https://github.com/sypht-team/sypht-elixir-client/blob/master/sypht_client/%{path}#L%{line}"
+        source_url_pattern:
+          "https://github.com/sypht-team/sypht-elixir-client/blob/master/sypht_client/%{path}#L%{line}"
       ]
     ]
   end
@@ -31,7 +33,7 @@ defmodule SyphtClient.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [],
+      mod: {SyphtClient.App, []},
       env: [
         # URL of token acquisition end point
         auth_url: "https://login.sypht.com/oauth/token",

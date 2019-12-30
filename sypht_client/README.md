@@ -2,7 +2,7 @@
 
 An Elixir client for the Sypht API <https://sypht.com>
 
-The method SyphtClient.Workflow.send\1 demonstrates the API:
+The method SyphtClient.send\1 demonstrates the API:
 
 ```elixir
 def send(path) do
@@ -17,15 +17,30 @@ def send(path) do
 end
 ```
 
+Access tokens are persisted using Cachex.
+
 The `sypht` mix task included in this repo lets you call this from the command line. The workflow can take a little while.
 
-The client is designed to run in a consumer or worker process started by something like [ConsumerSupervisor](https://hexdocs.pm/gen_stage/ConsumerSupervisor.html), [Flow](https://hexdocs.pm/flow/Flow.html) or [Broadway](https://hexdocs.pm/broadway/Broadway.html). Sypht API calls will retry failed requests based on configuration settings. See mix.exs for details.
+The client is designed to run with a consumer or worker process started by something like [ConsumerSupervisor](https://hexdocs.pm/gen_stage/ConsumerSupervisor.html), [Flow](https://hexdocs.pm/flow/Flow.html) or [Broadway](https://hexdocs.pm/broadway/Broadway.html). Sypht API calls will retry failed requests based on configuration settings. See mix.exs for details.
 
-If you want finer-grained control, invoke the methods in the SyphtAuth, SyphtUpload and SyphtResult modules directly.
+If you want finer-grained control, invoke the methods in the SyphtClient.Auth, SyphtClient.Upload and SyphtClient.Result modules directly.
 
 All Sypht client APIs depend on the environment variable SYPHT_API_KEY for authentication. This variable must be provided in the format CLIENT_ID:CLIENT_SECRET.
 
 You will as a minimum want to override the default upload_field_sets configuration value. See mix.exs and config.exs for details.
+
+## Initializing
+
+Start the client by calling `SyphtClient.App.start\2`, perferably as a child of your own application:
+
+```elixir
+children = [
+  %{
+    id: SyphtClient,
+    start: {SyphtClient, :start_link, []}
+  }
+]
+```
 
 ## Installation
 

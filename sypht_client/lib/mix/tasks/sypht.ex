@@ -26,9 +26,7 @@ defmodule Mix.Tasks.Sypht do
    }}`
   """
   def run([path]) do
-    Application.ensure_all_started(:hackney)
-    Application.ensure_all_started(:cachex)
-    Cachex.start_link(:token_cache, [])
-    SyphtClient.Workflow.send(path) |> IO.inspect()
+    Application.ensure_all_started(:sypht_client)
+    SyphtClient.send(path) |> IO.inspect()
   end
 end
