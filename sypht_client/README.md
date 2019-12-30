@@ -31,7 +31,7 @@ You will as a minimum want to override the default upload_field_sets configurati
 
 ## Initializing
 
-Start the client by calling `SyphtClient.App.start\2`, perferably as a child of your own application:
+Start the client by calling `SyphtClient.App.start\2` as a child of your own application:
 
 ```elixir
 children = [
