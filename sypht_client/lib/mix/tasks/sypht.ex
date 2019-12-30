@@ -1,6 +1,6 @@
 defmodule Mix.Tasks.Sypht do
   @moduledoc """
-  Invoke SyphtClient.Workflow.send(path) from the command line.
+  Invoke SyphtClient.send(path) from the command line.
   """
   use Mix.Task
 

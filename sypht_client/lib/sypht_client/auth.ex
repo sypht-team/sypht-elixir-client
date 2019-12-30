@@ -18,7 +18,8 @@ defmodule SyphtClient.Auth do
   @token_cache_key :sypht_access_token
 
   @doc """
-  Gets and caches an access token using the client ID and secret in the environment variable SYPHT_API_KEY.
+  Gets an access token using the client ID and secret in the environment variable SYPHT_API_KEY.
+  Caches and subsequently returns any tokens acquired from Sypht for :auth_ttl milliseconds.
   Returns {:ok, sypht_bearer_token} if successful, {:error, reason_string} otherwise. 
   """
   def access_token() do
