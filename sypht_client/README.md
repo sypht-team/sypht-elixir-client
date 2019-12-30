@@ -29,19 +29,6 @@ All Sypht client APIs depend on the environment variable SYPHT_API_KEY for authe
 
 You will as a minimum want to override the default upload_field_sets configuration value. See mix.exs and config.exs for details.
 
-## Initializing
-
-Start the client by calling `SyphtClient.App.start\2` as a child of your own application:
-
-```elixir
-children = [
-  %{
-    id: SyphtClient,
-    start: {SyphtClient, :start_link, []}
-  }
-]
-```
-
 ## Installation
 
 This package is installed by adding `sypht_client` to your list of dependencies in `mix.exs`:
