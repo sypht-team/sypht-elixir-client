@@ -12,7 +12,6 @@ def send(path) do
     {:ok, result}
   else
     {:error, reason} -> {:error, reason}
-    _ -> {:error, "Unspecified failure"}
   end
 end
 ```
