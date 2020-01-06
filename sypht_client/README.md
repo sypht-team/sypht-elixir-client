@@ -35,7 +35,7 @@ This package is installed by adding `sypht_client` to your list of dependencies 
 ```elixir
 def deps do
   [
-    {:sypht_client, "~> 0.1.0"}
+    {:sypht_client, "~> 0.1"}
   ]
 end
 ```

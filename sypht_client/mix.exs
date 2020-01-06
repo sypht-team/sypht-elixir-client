@@ -5,7 +5,7 @@ defmodule SyphtClient.MixProject do
     [
       app: :sypht_client,
       name: "SyphtClient",
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.9",
       description: description(),
       package: package(),
