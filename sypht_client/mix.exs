@@ -54,7 +54,7 @@ defmodule SyphtClient.MixProject do
         # Sypht field set(s) to invoke (see https://docs.sypht.com/#section/Introduction)
         upload_field_sets: ["sypht.generic"],
         # Retry uploads on server HTTP status
-        upload_retry_on: [500],
+        upload_retry_on: [500, 501, 502, 503],
         # Initial backoff milliseconds
         upload_initial_backoff: 200,
         # Continue backing off and retrying until this many milliseconds have elapsed
@@ -66,7 +66,7 @@ defmodule SyphtClient.MixProject do
         # URL of result end point
         result_url: "https://api.sypht.com/result/final",
         # Retry result requests on server HTTP status
-        result_retry_on: [202, 500],
+        result_retry_on: [202, 500, 501, 502, 503, 504],
         # Initial backoff milliseconds
         result_initial_backoff: 200,
         # Continue backing off and retrying until this many milliseconds have elapsed
